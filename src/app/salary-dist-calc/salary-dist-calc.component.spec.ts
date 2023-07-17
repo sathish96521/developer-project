@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddUserModalComponent } from './add-user-modal.component';
+import { SalaryDistCalcComponent } from './salary-dist-calc.component';
 
-describe('AddUserModalComponent', () => {
-  let component: AddUserModalComponent;
-  let fixture: ComponentFixture<AddUserModalComponent>;
+describe('SalaryDistCalcComponent', () => {
+  let component: SalaryDistCalcComponent;
+  let fixture: ComponentFixture<SalaryDistCalcComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddUserModalComponent ]
+      declarations: [ SalaryDistCalcComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddUserModalComponent);
+    fixture = TestBed.createComponent(SalaryDistCalcComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  isActive = true;
 
   constructor(private formBuilder: FormBuilder, private regService: RegistrationService, private router: Router) { }
   countries = [
@@ -66,23 +67,20 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(value: any) {
-    this.myData = JSON.stringify(value)
-    localStorage.setItem('key', this.myData)
+    this.myData = JSON.stringify(value);
+    localStorage.setItem('key', this.myData);
     this.myKeys.push(JSON.parse(localStorage.getItem('key')));
     console.log(this.myKeys);
-    
+    this.userForm.reset();
     // Save the registration data in the service
-    // this.registrationService.saveRegistrationData(registrationFormData);
-    this.regService.saveRegistrationData(this.userForm)
-    console.log(this.regService.saveRegistrationData(this.userForm));
-    
-    this.router.navigate(['/login']);
-
+    // this.regService.saveRegistrationData(this.userForm)
+    // this.router.navigate(['/login']);
   }
 
   editUser() {
-    alert('edit user is working...')
+    // alert('edit user is working...');
   }
+
   deleteUser(key: any) {
     const index = this.myKeys.indexOf(key);
     if (index > -1) {
@@ -90,6 +88,3 @@ export class SignupComponent implements OnInit {
     }
   }
 }
-
-
-

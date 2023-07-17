@@ -1,0 +1,31 @@
+<div class="container border mt-4 rounded" style="width: 65%;">
+    <h2>Salary Distribution</h2>
+
+    <div>
+        <label for="salary">Salary:</label>
+        <input type="number" id="salary" [(ngModel)]="salary" (input)="calculateDistribution()">
+    </div>
+
+    <table class="salaryCal my-4">
+        <tr>
+            <th>Category</th>
+            <th>Percentage</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td>Needs</td>
+            <td>50%</td>
+            <td>{{ calculateAmount(50) | number: '1.2-2' }}</td>
+        </tr>
+        <tr>
+            <td>Wants</td>
+            <td>30%</td>
+            <td>{{ calculateAmount(30) | number: '1.2-2' }}</td>
+        </tr>
+        <tr>
+            <td>Savings</td>
+            <td>20%</td>
+            <td>{{ calculateAmount(20) | number: '1.2-2' }}</td>
+        </tr>
+    </table>
+</div>
