@@ -1,0 +1,137 @@
+<div class="container border mt-4 rounded" style="width: 65%;">
+    <div class="row">
+        <div>
+            <section class="formStyles">
+                <div class="col-md-8 offset-2">
+                    <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)">
+                        <h2 class="text-center">User Registration Form</h2>
+                        <div class="form-group">
+                            <label>Name:</label>
+                            <input type="text" class="form-control" formControlName="firstName">
+                            <div
+                                *ngIf="userForm.get('firstName').errors && (userForm.get('firstName').touched || userForm.get('firstName').dirty)">
+                                <span *ngIf="userForm.get('firstName').errors.required" class='errors'>
+                                    Name is required
+                                </span>
+                                <span class='errors' *ngIf="userForm.get('firstName').errors.pattern">
+                                    Name should contains minimum 5 characters and max 15 characters
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="email" class="form-control" formControlName="userEmail">
+                            <div
+                                *ngIf="userForm.get('userEmail').errors && (userForm.get('userEmail').touched || userForm.get('userEmail').dirty)">
+                                <span *ngIf="userForm.get('userEmail').errors.required" class='errors'>
+                                    Email is required
+                                </span>
+                                <span class='errors' *ngIf="userForm.get('userEmail').errors.email">
+                                    Email must be a valid email address
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="form-group">
+                            <label>Website:</label><input type="text" class="form-control" formControlName="website">
+                            <div
+                                *ngIf="userForm.get('website').errors && (userForm.get('website').touched || userForm.get('website').dirty)">
+                                <span *ngIf="userForm.get('website').errors.required" class='errors'>
+                                    website is required
+                                </span>
+                            </div>
+                        </div> -->
+                        <div class="form-group">
+                            <label>Phone number:</label>
+                            <input type="number" class="form-control" formControlName="phonenumber">
+                            <div
+                                *ngIf="userForm.get('phonenumber').errors && (userForm.get('phonenumber').touched || userForm.get('phonenumber').dirty)">
+                                <span *ngIf="userForm.get('phonenumber').errors.required" class='errors'>
+                                    Phone Number is required
+                                </span>
+                                <span *ngIf="userForm.get('phonenumber').errors.pattern" class='errors'>
+                                    {{userForm.get('phonenumber').value}}
+                                    Phone Number should be 10 digits
+                                </span>
+                                <span class='errors' *ngIf="userForm.get('phonenumber').errors.pattern">
+                                    Phone Number should be 10 digits
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="countries">Countries</label>
+                            <select class="form-control" name="countries" id="countries" formControlName="countries">
+                                <option value="">select category</option>
+                                <option *ngFor="let country of countries" [ngValue]="country.countryName">
+                                    {{country.countryName}}</option>
+                            </select>
+                            <div
+                                *ngIf="userForm.get('countries').errors && (userForm.get('countries').touched || userForm.get('countries').dirty)">
+                                <span *ngIf="userForm.get('countries').errors.required" class='errors'>
+                                    Select Country is required
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notes">Description</label>
+                            <textarea class="form-control" name="description" id="description"
+                                formControlName="description" rows="3"
+                                placeholder="Add additional notes here."></textarea>
+                            <div
+                                *ngIf="userForm.get('description').errors && (userForm.get('description').touched || userForm.get('description').dirty)">
+                                <span *ngIf="userForm.get('description').errors.required" class='errors'>
+                                    Description is required
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Date:</label>
+                            <input type="date" class="form-control" formControlName="date">
+                            <div
+                                *ngIf="userForm.get('date').errors && (userForm.get('date').touched || userForm.get('date').dirty)">
+                                <span *ngIf="userForm.get('date').errors.required" class='errors'>
+                                    Date is required
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-success mt-4">Submit</button>
+                    </form>
+                </div>
+                <div> &nbsp;</div>
+                <h2 *ngIf="myKeys.length > 0" class="text-center">Users List</h2>
+                <table class="customers table table-bordered table-responsive">
+                    <tr *ngIf="myKeys.length > 0">
+                        <th>S.no</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <!-- <th>Website</th> -->
+                        <th>Phone</th>
+                        <th>Countries</th>
+                        <th>Description</th>
+                        <th>Edit</th>
+                    </tr>
+                    <tr *ngFor="let key of myKeys;index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{key.firstName}}</td>
+                        <td>{{key.userEmail}}</td>
+                        <!-- <td>{{key.website}}</td> -->
+                        <td>{{key.phonenumber}}</td>
+                        <td>{{key.countries}}</td>
+                        <td>{{key.description}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary mx-4" (click)='editUser()'>Edit</button>
+                            <button type="button" class='btn btn-warning' (click)='deleteUser(key)'>Delete</button>
+                        </td>
+
+                    </tr>
+                </table>
+            </section>
+        </div>
+    </div>
+</div>

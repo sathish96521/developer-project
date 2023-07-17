@@ -1,0 +1,25 @@
+<!-- <p>dashboard works!</p> -->
+<h2>User Table</h2>
+<button (click)="addUser()">Add User</button>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>
+                <button (click)="editUser(user)">Edit</button>
+                <button (click)="viewUser(user)">View</button>
+                <button (click)="deleteUser(user)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
