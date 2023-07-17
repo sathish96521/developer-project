@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { RegistrationService } from '../registration.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -8,7 +10,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private regService: RegistrationService, private router: Router) { }
   countries = [
     {
       "countryId": 1,
@@ -53,13 +55,13 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.pattern('^[a-zA-Z\s]{5,15}$')]],
-      userEmail: ['', Validators.required, Validators.email],
-      // website: ['', Validators.required],
-      phonenumber: ['', Validators.required, Validators.pattern('^[0-9]{10}$')],
-      countries: ['', Validators.required],
-      description: ['', [Validators.required, Validators.minLength(4)]],
-      date: ['', Validators.required],
+      "firstName": ['', [Validators.required, Validators.pattern('^[a-zA-Z\s]{5,15}$')]],
+      "userEmail": ["", Validators.compose([Validators.required, Validators.email])],
+      "password": ['', Validators.required],
+      "phonenumber": ["", Validators.compose([Validators.required, Validators.minLength(5)])],
+      "countries": ['', Validators.required],
+      "description": ['', [Validators.required, Validators.minLength(4)]],
+      "date": ['', Validators.required],
     })
   }
 
@@ -68,7 +70,14 @@ export class SignupComponent implements OnInit {
     localStorage.setItem('key', this.myData)
     this.myKeys.push(JSON.parse(localStorage.getItem('key')));
     console.log(this.myKeys);
-    this.userForm.reset()
+    
+    // Save the registration data in the service
+    // this.registrationService.saveRegistrationData(registrationFormData);
+    this.regService.saveRegistrationData(this.userForm)
+    console.log(this.regService.saveRegistrationData(this.userForm));
+    
+    this.router.navigate(['/login']);
+
   }
 
   editUser() {
